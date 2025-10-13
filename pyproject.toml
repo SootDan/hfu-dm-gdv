@@ -16,3 +16,10 @@ dependencies    = [
   "black>=25.9.0",
   #  "ultralytics>=8.0.117"
 ]
+
+[tool.pylint.MAIN]
+init-hook = """
+try: import pylint_venv
+except ImportError: pass
+else: pylint_venv.inithook()
+"""

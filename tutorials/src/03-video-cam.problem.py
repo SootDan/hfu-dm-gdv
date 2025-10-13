@@ -6,21 +6,22 @@
 import numpy as np
 import cv2
 
-# TODO Capture webcam image using 'VideoCapture' and store it in the variable 'cap'. Typically, 
-# the parameter is 0 for the default camera.
+cap: cv2.VideoCapture = cv2.VideoCapture(0)
 
-# TODO Get camera image parameters using 'get' on the 'cap' object:
-# - width (use 'CAP_PROP_FRAME_WIDTH')
-# - height (use 'CAP_PROP_FRAME_HEIGHT')
-# - codec (use 'CAP_PROP_CODEC_PIXEL_FORMAT')
-# Print the values to the console.
+width: float = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+height: float = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+codec: float = cap.get(cv2.CAP_PROP_CODEC_PIXEL_FORMAT)
+print(f"Width: {width}\nHeight: {height}\nCodec: {codec}")
 
-# TODO Create a window for the video using 'namedWindow' with the title "Video image".
-
+cv2.namedWindow("Video image", cv2.WINDOW_GUI_NORMAL)
+#cv2.imshow("Image", cap)
+#cv2.waitKey(0)
 # TODO Start a loop to continuously read frames from the camera using 'while True:'.
-
-# TODO (In loop) Read a camera frame with 'read' and check if that was successful.
-
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break
+    
 # TODO (In loop, if successful) (Skip this step for now and implement the display first in order 
 # to see the camera image.)
 # Create four flipped tiles of the image by first creating an empty image 
