@@ -6,38 +6,42 @@
 import cv2
 import numpy as np
 
-# TODO Create a white image of size 625x512 using the 'ones' function from numpy
+width: int = 625
+height: int = 512
+image: cv2.UMat = np.ones((height, width, 3), np.uint8) * 255       # 3 stands for the RGB channels
 
 ## Drawing helper variables
 # Thickness
-thick = 10
-thin = 3
+thick: int = 10
+thin: int = 3
 
 # Colors in RGB
-blue = (0, 0, 255)
-red = (255, 0, 0)
-darkgreen = (20, 200, 20)
-black = (0, 0, 0)
+blue: tuple = (255, 0, 0)
+red: tuple = (0, 0, 255)
+darkgreen: tuple = (20, 200, 20)
+black: tuple = (0, 0, 0)
 
 # Fonts
-font_size_large = 3
-font_size_small = 1
-font = cv2.FONT_HERSHEY_SIMPLEX
-
-# TODO Create a window and display the image and jump to the last task and display the image for debugging 
-# before you implement the drawing tasks
+font_size_large: int = 3
+font_size_small: int = 1
+font: int = cv2.FONT_HERSHEY_SIMPLEX
 
 
-# TODO Draw a green diagonal cross over the image using 'line'
+image = cv2.line(image, (0, 0), (width, height), darkgreen, thin)
+image = cv2.line(image, (0, height), (width, 0), darkgreen, thin)
 
-# TODO Draw a circle using 'circle'
+image = cv2.circle(image, (width // 2, height // 2), thick * thin, red, thick)
 
-# TODO Write some text using 'putText'
+lorem_ipsum: str = "Lorem ipsum dolor sit amet."
+image = cv2.putText(image, lorem_ipsum, (0, height - 10), font, font_size_small, black, thin)
 
-# TODO Draw arrows indicating a coordinate system using 'arrowedLine' and use 'putText' to label the axes
+image = cv2.arrowedLine(image, (30, 30), (30, 90), blue, thin)
+image = cv2.arrowedLine(image, (30, 30), (90, 30), blue, thin)
 
+image = cv2.putText(image, "X-Axis", (30, 25), font, font_size_small, blue, thin)
+image = cv2.putText(image, "Y-Axis", (30, 120), font, font_size_small, blue, thin)
 
-# TODO Display the image
-
-## FIXME there is a bug in this code, can you find it? Hint: It is related to the color definitions.
+cv2.imshow("Drawing Image", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
